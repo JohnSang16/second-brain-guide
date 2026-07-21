@@ -42,7 +42,7 @@ Obsidian holds the memory. Claude Code reads it, writes to it, acts on it.
 ## Quick setup
 
 1. **Obsidian** (free): [obsidian.md](https://obsidian.md/download)
-2. **Claude Code**: [claude.com/product/claude-code](https://claude.com/product/claude-code)
+2. **Claude Code** (~$20/mo, Claude Pro): [claude.com/product/claude-code](https://claude.com/product/claude-code)
 3. Make your vault its own folder, open Claude Code from that folder
 
 That's the whole technical setup. Everything past this point is structure and habit, not tools.

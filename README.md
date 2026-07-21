@@ -67,18 +67,6 @@ That's the whole technical setup. Everything past this point is structure and ha
 
 ---
 
-## Syncing across devices
-
-> **Skip this whole section if you only ever work from one machine.**
-
-- **Laptop:** Claude Code just points at the Drive-synced folder like any other directory. Open the same folder as an Obsidian vault on a second laptop and Drive keeps both in sync.
-- **Phone:** more limited. Obsidian's mobile app can't open an arbitrary Drive-synced folder as a vault, that native experience needs Obsidian's own paid Sync (or a sync-focused plugin). Drive on a phone gets you the raw files plus claude.ai's Google Drive connector, not the native Obsidian UI.
-- **Why Drive, not just GitHub:** a GitHub-only vault is just a repo of Markdown files, fine for the agent and for history, but not the Obsidian app. Obsidian's own cross-device sync is paid. Drive gets you that same experience on desktop for free.
-- **Why GitHub still matters:** real version history, and a sanitized copy if you ever want to share your setup publicly.
-- **Bonus:** persistent memory means switching devices doesn't mean rebuilding your agents, the same commands and preferences carry over into a fresh session.
-
----
-
 ## Scaffolding from zero
 
 Don't hand-design the folder structure up front. Let Claude Code interview you instead, ask about your goals and commitments, then draft a structure and get your approval before writing anything.
@@ -331,6 +319,18 @@ From what I already lean on, the obvious ones to spin up:
 - **research agent** — instead of me sitting in Google, opening tabs and copy-pasting, I hand it a topic and it does the whole dig: pulls from the best, highly-rated sources for that specific thing, cites them, and logs it back as a knowledge note using the conventions and folder structure it already knows from my vault. Isolated research in, a finished linked note in the right place out.
 - **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump.
 - **job-scout agent** — part job finder, part `lc-coach` for my whole career. It scours the most recent changes to anything FAANG-related in my vault, tells me the highest-ROI things to work on next so I stay focused, then hands back verified open roles plus a closing affirmation in the same voice the rest of the system runs on.
+
+---
+
+## Syncing across devices
+
+> **Skip this whole section if you only ever work from one machine.**
+
+- **Laptop:** Claude Code just points at the Drive-synced folder like any other directory. Open the same folder as an Obsidian vault on a second laptop and Drive keeps both in sync.
+- **Phone:** more limited. Obsidian's mobile app can't open an arbitrary Drive-synced folder as a vault, that native experience needs Obsidian's own paid Sync (or a sync-focused plugin). Drive on a phone gets you the raw files plus claude.ai's Google Drive connector, not the native Obsidian UI.
+- **Why Drive, not just GitHub:** a GitHub-only vault is just a repo of Markdown files, fine for the agent and for history, but not the Obsidian app. Obsidian's own cross-device sync is paid. Drive gets you that same experience on desktop for free.
+- **Why GitHub still matters:** real version history, and a sanitized copy if you ever want to share your setup publicly.
+- **Bonus:** persistent memory means switching devices doesn't mean rebuilding your agents, the same commands and preferences carry over into a fresh session.
 
 ---
 

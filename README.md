@@ -111,9 +111,9 @@ vault/
 
 ## How I actually use it
 
-### `/daily-full`: the secretary that runs every morning
+### `/daily-full`: my most-used agent
 
-This is the anchor of the whole system and my main use case. Every morning it acts like a secretary: instead of raw data, it hands back one synthesized brief of what actually matters today.
+Every morning it acts like a secretary: instead of raw data, it hands back one synthesized brief of what actually matters today.
 
 - **MCP tooling used:** Slack, Gmail, GitHub, Google Calendar, plus a live web search for open roles
 - **What makes it different from a dashboard:** day-aware filtering (weekdays get full context, weekends filter to personal/career only), sections only appear if there's real content, nothing repeats across sections
@@ -158,7 +158,7 @@ the reader. Real numbers as fuel, not the point. No generic filler.
 
 ### My agents
 
-Past the daily secretary, these are the commands I actually reach for most:
+Past `/daily-full`, these are the commands I actually reach for most:
 
 **`/log`**: feeds anything, a learning, a recap, a reflection, straight into the vault and files it without me deciding where it goes. My most-used command by a wide margin.
 
@@ -235,6 +235,26 @@ plain language first, define every term. Use analogies grounded in something
 real, never a made-up hypothetical. Split into short labeled sections.
 Actually re-derive it, don't repeat the same wording. Conversation-only
 unless separately told to log it.
+```
+
+**`/quiz`**: the two below are for school specifically, once the semester's in session. Active-recall quiz mode, one question at a time, grades honestly, tracks misses, closes with a score summary.
+
+```
+# /quiz
+One question at a time, don't move on until answered, no revealing the
+answer early. Grade honestly (correct/partial/wrong), briefly explain misses
+before the next question. Vary difficulty and angle. Default 8-10 questions
+per session, close with a score summary and what to revisit.
+```
+
+**`/hw-check`**: never solves a homework problem for me, makes me name the concept and attempt it solo first, then grades the reasoning, not just the answer.
+
+```
+# /hw-check
+Never solve the problem first. Ask what concept it's testing before doing
+anything else. Have me attempt it solo. If wrong, name where the reasoning
+broke, don't give the fix. Only reveal the full answer after a real attempt
+or two failed retries, and walk through it, don't just state it.
 ```
 
 **`/eod`**: closes the day, what shipped, what's pending, one grounded closing line, a nudge to log before I close out.

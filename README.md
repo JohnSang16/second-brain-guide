@@ -114,7 +114,11 @@ vault/
 
 ## How I actually use it
 
-Not everything should be a slash command. A **Skill** carries a `description` that lets Claude Code fire it on its own when the moment matches, plus room to grow past a single prompt. A **Command** is a flat, explicit-only shortcut, nothing more than a prompt template. I split mine on that line: anything that benefits from firing without me typing the slash, or that outgrew a single prompt block, became a Skill. The rest stayed Commands.
+Most of what I run I never type. It fires on its own the moment it's relevant: I say "log this" and it files into the right folder without me picking one, I say "I don't get it" and the tutor re-explains the last thing plainer. Those are Skills, and the auto-firing ones are the ones I lean on hardest.
+
+The heavier stuff I still want to pull the trigger on myself, the morning brief, a LeetCode session, closing out the day, are Skills too, just set to explicit-only so they don't fire on a stray mention. Only the two dumbest, most deterministic jobs, commit and push, stayed plain Commands.
+
+The line I actually split on: if it should be able to fire without me, or it grew past a single prompt block, it's a Skill. If it's a one-shot template I'll always trigger by hand, it's a Command.
 
 ### The bench
 
@@ -301,6 +305,17 @@ No AI attribution ever. One logical change per commit.
 Check for uncommitted changes (run /cmt first if needed), fetch, rebase on a
 personal branch or merge on a shared one, stop on conflicts, push, confirm.
 ```
+
+### Agents, where this goes next
+
+Skills and commands both run in my main chat. An agent is a different animal: a separate Claude with its own context window that goes off, does a big messy job alone, pulls whatever skills it needs, and hands back only the result, not the whole transcript. That keeps my main thread clean and lets me run several at once. The tell that something wants to be an agent, not a skill: it reads across a ton of files or the web, it runs long, and I only care about the final artifact.
+
+From what I already lean on, the obvious ones to spin up:
+
+- **research agent** — I have a `/research` skill that writes a knowledge note. As an agent it does the whole dig in isolation and drops back a finished, linked note, so the reading and dead ends never touch my main context.
+- **vault-audit agent** — my `lint` skill reads the entire vault for stale notes, missing pages, broken links. Perfect fan-out job: send an agent, get back the itemized list, don't watch it crawl every folder.
+- **job-scout agent** — the FAANG search is already several parallel lookups. Making it a real agent means verified roles come back as one clean list while the searching happens off to the side.
+- **person-lookup agent** — before a coffee chat, one agent researches the person and hands back a short brief. Isolated research in, distilled profile out.
 
 ---
 

@@ -21,6 +21,7 @@ Obsidian holds your notes as linked Markdown. Claude Code reads and writes to th
 - [My setup](#my-setup): the actual folder structure
 - [How I actually use it](#how-i-actually-use-it): the daily-full secretary, plus my most-used agents
 - [Notes](#notes): what mattered more than the folders themselves
+- [Start now](#start-now): the recap, if you just want to go
 
 ---
 
@@ -265,3 +266,14 @@ sentence, not generic. Ask: "want to run /log before you close out?"
 - **Let the agent do the admin work.** Filing, linking, flagging stale notes, that's the busy work a self-maintaining vault is supposed to remove.
 - **Public and private don't mix in one repo.** Keep a sanitized version separate from the vault with your real logs, goals, and personal data.
 - **This is my scope, not the ceiling.** Swap in whatever MCPs, tooling, skills, and agents fit your own life.
+- **Do whatever you want with this.** Anything sensitive, school records, other people's info, an employer's data, is on you to handle under whatever rules actually apply to it, this repo isn't legal advice and doesn't cover you.
+
+---
+
+## Start now
+
+1. Install [Obsidian](https://obsidian.md/download) and [Claude Code](https://claude.com/product/claude-code)
+2. Make a folder, open it as an Obsidian vault, then open Claude Code in that same folder
+3. Give it the starter prompt from [Scaffolding from zero](#scaffolding-from-zero) and let it interview you
+4. Approve the folder structure and `CLAUDE.md` it proposes
+5. Start logging, everything else in this guide grows out of that

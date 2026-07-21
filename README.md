@@ -2,7 +2,13 @@
 
 Obsidian holds your notes as linked Markdown. Claude Code reads and writes to them as an agent. Together, you get a knowledge base that updates itself instead of one you maintain by hand. Built and used daily as a CS student running an internship, a student org, classes, and a FAANG-prep grind at once, but the pattern holds for anyone who wants an agent that actually knows their life instead of starting from zero every chat.
 
-[The idea](#the-idea) · [Quick setup](#quick-setup) · [Syncing across devices](#syncing-across-devices) · [Scaffolding from zero](#scaffolding-from-zero) · [My setup](#my-setup) · [How I actually use it](#how-i-actually-use-it) · [End notes](#end-notes)
+- [The idea](#the-idea): why Obsidian plus Claude Code beats either one alone
+- [Quick setup](#quick-setup): two installs, that's the whole technical lift
+- [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
+- [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
+- [My setup](#my-setup): the actual folder structure
+- [How I actually use it](#how-i-actually-use-it): daily briefs, logging, lint, LeetCode coaching, school agents
+- [End notes](#end-notes): what mattered more than the folders themselves
 
 ---
 
@@ -110,6 +116,8 @@ Here's why it's worth building the rest of the vault around: since it's backed b
 
 ### The logging workflow: how pages actually get added
 
+In practice this routes through one command, `/log`. Feed it anything, a learning, a recap, a reflection, and it classifies the input and files it into the right daily-log section or knowledge-note subfolder without you having to think about where it goes. This is the single most-used command in my vault by a wide margin, hundreds of commits and counting.
+
 The standard loop for adding to the vault, and this matters more than any folder structure:
 
 - **Learning something new:** don't let the agent replace the thinking. Read the material, actually learn it, then log a short note to the vault after. The value isn't the note itself, it's that you now know you've touched the topic before. Weeks later, `/tutor` or a plain query against the vault pulls that note back up instead of you re-learning it from scratch or forgetting you ever covered it.
@@ -125,7 +133,9 @@ Put together, this is the best note-taking app I've used, not because of any sin
 
 **School-specific agents (`/tutor`, `/quiz`, `/hw-check`):** coursework support that reads what I'm actually taking and where I'm stuck from vault notes, instead of generic tutoring. `/hw-check` in particular is just a review pass against my own submitted work before I turn it in.
 
-**Auto-commit as an audit trail:** every meaningful vault change gets its own commit. Sounds like overkill until you realize it turns the vault into a real history of how your thinking and priorities evolved, not just a static snapshot.
+**Vault maintenance (`/lint`):** runs every two weeks, scans daily logs for knowledge gaps, checks for people who were mentioned but never got a page, flags coffee chats gone stale, catches broken `[[links]]` and empty folders, and regenerates the knowledge index. This is the actual mechanic behind letting the agent do the admin work, I don't go looking for the rot, the command finds it and hands me a punch list.
+
+**Auto-commit as an audit trail (`/cmt`, `/yur`):** every meaningful vault change gets its own commit, `/cmt` stages and commits, `/yur` does the same and pushes. Sounds like overkill until you realize it turns the vault into a real history of how your thinking and priorities evolved, not just a static snapshot. My own vault is closing in on a thousand commits this way.
 
 ---
 

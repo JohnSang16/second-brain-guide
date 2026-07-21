@@ -39,6 +39,16 @@ Obsidian holds the memory. Claude Code reads it, writes to it, acts on it.
 
 **Why this matters as a student:** constant context-switching (classes, internship, clubs, job search) means re-explaining your situation to an AI every session is wasted time. With a vault, the agent already knows your goals and active threads.
 
+### What it fixes
+
+Straight across from the problems above:
+
+- No more re-explaining my whole life every session, the agent reads my goals and live threads from the vault
+- Scattered Google Docs turned into linked, filed notes I can actually search and reuse
+- Priorities live in the vault, so "what should I focus on" is grounded in what I committed to, not generic
+- LeetCode has a visible streak and a reason to protect it
+- Daily work and learnings get filed somewhere the agent can read, instead of dying in a notes app
+
 ---
 
 ## Quick setup
@@ -324,6 +334,6 @@ From what I already lean on, the obvious ones to spin up:
 - **`CLAUDE.md` is the highest-leverage file.** Everything downstream depends on it staying current.
 - **Let the agent do the admin work.** Filing, linking, flagging stale notes, that's the busy work a self-maintaining vault is supposed to remove.
 - **Public and private don't mix in one repo.** Keep a sanitized version separate from the vault with your real logs, goals, and personal data.
-- **This is my scope, not the ceiling.** Swap in whatever MCPs, tooling, skills, and agents fit your own life.
+- **This is my scope, not the ceiling.** Right now my whole focus is career and school, so that's what mine is built around. Yours should be shaped around whatever you're actually chasing. Once the semester starts I'm adding skills to streamline my student-org work, and eventually stuff for personal interests too, so this repo stays active and keeps updating. Swap in whatever MCPs, tooling, skills, and agents fit your life, and check back.
 
 > Whatever you do with this is on you. Sensitive stuff especially, school records, other people's info, employer data, handle it however you're actually supposed to.

@@ -4,7 +4,9 @@ Simple & straightforward guide to offloading your brain to ai if you're a chud l
 
 ## New here? Start with this
 
-**Obsidian** is a free note-taking app where your notes are plain text files in a folder you own, all linked together. **Claude Code** is an AI agent that reads and writes the files in a folder. Point Claude Code at your Obsidian folder and you get a **second brain**: notes an AI keeps organized for you, and an assistant that already knows your goals instead of one you re-brief every session.
+- **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together.
+- **Claude Code:** an AI agent that reads and writes the files in a folder.
+- **Together:** point Claude Code at your Obsidian folder and you get a second brain, notes an AI keeps organized and an assistant that already knows your goals instead of one you re-brief every session.
 
 **Quick benefits:**
 

@@ -2,6 +2,27 @@
 
 Simple & straightforward guide to offloading your brain to ai if you're a chud like me
 
+## New here? Start with this
+
+**Obsidian** is a free note-taking app. Your notes are just plain text files (Markdown) in a normal folder on your computer, all linked to each other. Nothing is trapped inside a company's app or cloud, the files are yours.
+
+**Claude Code** is an AI agent that can read and write the files in a folder. Point it at your Obsidian folder and it can see everything you've saved and write new notes for you.
+
+Put the two together and you get a **second brain**: a personal knowledge base an AI keeps organized for you, instead of one you maintain by hand.
+
+**The problem it solves:** you re-explain your whole life to an AI every time you open a chat, your notes pile up with no structure, and your goals live only in your head so any advice you get back is generic.
+
+**What you get, high level:**
+
+- An AI that already knows your goals and what you're working on, zero re-explaining
+- Notes that stay organized, linked, and searchable without you filing them by hand
+- One place that's genuinely yours: plain files you own, not locked in someone's app
+- A knowledge base that updates itself as you work, instead of rotting in a notes app
+
+The rest of this guide is how I actually set mine up.
+
+---
+
 ## The problem
 
 Before this, my actual situation looked like:

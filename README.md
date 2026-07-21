@@ -40,9 +40,9 @@ Make your vault its own folder, open Claude Code from that same folder. That's t
 
 Hosting the vault in Google Drive is what actually made this usable across my laptops.
 
+- **If you only ever work from one machine, skip this.**
 - On a laptop, Claude Code points at the local Drive-synced folder like any other directory. Nothing special about it. Open the same folder as an Obsidian vault on a second laptop and Drive keeps both showing the same notes.
 - On a phone, it's more limited, and worth being straight about. The Obsidian mobile app can't just open an arbitrary Drive-synced folder as a vault, that native experience needs Obsidian's own paid Sync (or a similar sync-focused plugin). What Drive does give you on a phone is access to the raw files through the Drive app, and claude.ai's Google Drive connector can query straight into the vault from there, just not through the native Obsidian mobile UI.
-- If you only ever work from one machine, skip this.
 
 Here's the actual reason Drive matters, not just GitHub: if the vault only lived in a GitHub repo, you'd have a stack of Markdown files you can browse in VS Code or on github.com. Useful for the agent, useful for history, but that's not the Obsidian app. Obsidian's own cross-device sync is a paid feature. Hosting the vault in Google Drive gets you the desktop version of that for free, Drive syncs the folder across your laptops, and Obsidian just opens that synced folder as a vault on whichever machine you're on. You get the real Obsidian UI, graph view and all, on every desktop, without paying for Obsidian Sync.
 

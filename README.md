@@ -1,6 +1,6 @@
 # Obsidian + Claude Code: A Student's Second Brain
 
-My actual setup. No manifesto, just markdown.
+My simple guide to creating your second brain
 
 ## The problem
 

@@ -2,18 +2,11 @@
 
 Simple & straightforward guide to offloading your brain to ai if you're a chud like me
 
-## New here? Start with this
+## Quick definitions
 
 - **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together.
 - **Claude Code:** an AI agent that reads and writes the files in a folder.
 - **Together:** point Claude Code at your Obsidian folder and you get a second brain, notes an AI keeps organized and an assistant that already knows your goals instead of one you re-brief every session.
-
-**Quick benefits:**
-
-- No re-explaining yourself, the AI reads your goals and current work from your notes
-- Notes stay organized, linked, and searchable without you filing them
-- Plain files you own, not locked in an app
-- It keeps itself updated as you work
 
 ---
 
@@ -51,6 +44,16 @@ Obsidian is that place:
 - **It's agent-agnostic.** The vault outlives whatever tool you're using it with today.
 
 **Why this matters as a student:** constant context-switching (classes, internship, clubs, job search) means re-explaining your situation to an AI every session is wasted time. With a vault, the agent already knows your goals and active threads.
+
+### What it fixes
+
+Straight across from the problems above:
+
+- No more re-explaining my whole life every session, the agent reads my goals and live threads from the vault
+- Scattered Google Docs turned into linked, filed notes I can actually search and reuse
+- Priorities live in the vault, so "what should I focus on" is grounded in what I committed to, not generic
+- LeetCode has a visible streak and a reason to protect it
+- Daily work and learnings get filed somewhere the agent can read, instead of dying in a notes app
 
 ---
 

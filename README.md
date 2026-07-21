@@ -19,7 +19,7 @@ Obsidian holds your notes as linked Markdown. Claude Code reads and writes to th
 - [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): the actual folder structure
-- [How I actually use it](#how-i-actually-use-it): the daily-full secretary, plus my most-used agents
+- [How I actually use it](#how-i-actually-use-it): the daily-full secretary, plus the skills/commands bench
 - [Notes](#notes): what mattered more than the folders themselves
 
 ---
@@ -98,31 +98,112 @@ vault/
 ├── career/                  # FAANG prep, LeetCode tracker, resume, LinkedIn drafts
 ├── org/                     # club or student org: projects, people, knowledge
 ├── personal/                 # finances, fitness, personal projects
-└── .claude/commands/         # slash commands, mirrored in _agents/commands/ by category
+└── .claude/
+    ├── commands/              # explicit-only shortcuts: cmt, yur
+    └── skills/                # richer capabilities, some auto-trigger
+                                # mirrored in _agents/skills/<category> for humans
 ```
 
 (the trailing comments describe what's inside each folder, not extra root items)
 
 - **Knowledge notes are separate from daily logs.** Logs are a stream of what happened. Knowledge notes are distilled, linked, filed into topic subfolders.
 - **`memory/` is not a task list.** It holds durable facts, not in-progress state.
-- **Commands are organized twice on purpose.** Flat in `.claude/commands/` for Claude Code, categorized in `_agents/commands/<category>/` for humans browsing the repo.
+- **Skills and commands are organized twice on purpose.** Flat in `.claude/` for Claude Code, categorized in `_agents/<type>/<category>/` for humans browsing the repo.
 
 ---
 
 ## How I actually use it
 
-### `/daily-full`: my most-used agent
+Not everything should be a slash command. A **Skill** carries a `description` that lets Claude Code fire it on its own when the moment matches, plus room to grow past a single prompt. A **Command** is a flat, explicit-only shortcut, nothing more than a prompt template. I split mine on that line: anything that benefits from firing without me typing the slash, or that outgrew a single prompt block, became a Skill. The rest stayed Commands.
 
-Every morning it acts like a secretary: instead of raw data, it hands back one synthesized brief of what actually matters today.
+### The bench
+
+| Name | Type | Trigger | Does |
+|---|---|---|---|
+| `daily-full` | Skill | explicit only | morning brief, synthesized chief of staff style |
+| `log` | Skill | auto (log this, recapping something that happened) | files anything into the vault without me deciding where |
+| `lint` | Skill | auto (mentions of staleness or gaps) plus biweekly | audits the vault for drift |
+| `lc-coach` | Skill | explicit only | LeetCode practice, gamified |
+| `tutor` | Skill | auto (I do not get it, explain that again) | re-explains the last thing, plainer |
+| `quiz` | Skill | explicit only | active recall quiz mode for school |
+| `eod` | Skill | explicit only | closes the day |
+| `cmt` | Command | explicit only | stage and commit |
+| `yur` | Command | explicit only | commit and push |
+
+### Skills, auto-trigger
+
+These fire on their own when the moment matches, no slash typing required.
+
+**`log`**: feeds anything, a learning, a recap, a reflection, straight into the vault and files it without me deciding where it goes. My most-used skill by a wide margin.
+
+```
+# log (Skill)
+description: Use whenever the user shares a learning, recap, activity update,
+or reflection, and route it into the vault without asking where it goes.
+
+Classify the input, then route it.
+
+| Type               | Destination                        |
+|---------------------|--------------------------------------|
+| Technical learning  | Knowledge note, right subfolder      |
+| Daily activity      | Today's log, work section            |
+| Personal            | Today's log, personal section        |
+| Mix                 | Split and file each part             |
+
+Extend an existing note if one fits, otherwise create a new one with a source
+line and a related-notes link. Commit immediately after writing.
+```
+
+**`lint`**: runs every two weeks and audits the vault so I don't have to notice what's gone stale on my own, and can also fire early if I mention a gap directly.
+
+```
+# lint (Skill)
+description: Use when the user asks to audit the vault, mentions something
+feels stale or disorganized, or on the biweekly scheduled run.
+
+Check for:
+- knowledge gaps (concepts mentioned, never given a note)
+- people gaps (names mentioned, no page yet)
+- stale items (todo-style folders untouched 14+ days)
+- empty folders that should have content by now
+- stale paths (CLAUDE.md vs real folder structure)
+- pattern topics (mentioned 3+ separate days, deserves a note)
+- broken [[links]]
+Regenerate the knowledge index. Report as a short itemized list, then ask
+what to create.
+```
+
+**`tutor`**: re-explains something already covered, at the plainest level possible, for when an explanation landed too technical or too fast.
+
+```
+# tutor (Skill)
+description: Use when the user signals an explanation did not land and wants
+it re-explained in plain language.
+
+Re-explain the most recent substantive explanation (or a named topic/slice),
+plain language first, define every term. Use analogies grounded in something
+real, never a made-up hypothetical. Split into short labeled sections.
+Actually re-derive it, don't repeat the same wording. Conversation-only
+unless separately told to log it.
+```
+
+### Skills, explicit only
+
+Deliberate enough that I don't want them firing on a stray mention, but complex enough to outgrow a plain command.
+
+**`daily-full`**: my most-used skill overall. Every morning it acts like a secretary: instead of raw data, it hands back one synthesized brief of what actually matters today.
 
 - **MCP tooling used:** Slack, Gmail, GitHub, Google Calendar, plus a live web search for open roles
 - **What makes it different from a dashboard:** day-aware filtering (weekdays get full context, weekends filter to personal/career only), sections only appear if there's real content, nothing repeats across sections
 - **Customization:** the tone of the closing affirmation and the shape of the output are fully mine, rewrite both for your own voice and goals
 
-Trimmed, genericized version of the actual command:
+Trimmed, genericized version of the actual skill:
 
 ```
-# /daily-full
+# daily-full (Skill)
+description: Use only when the user explicitly asks for their daily brief or
+invokes /daily-full by name. A general question about their day or schedule
+is not by itself a request for the brief.
 
 Runs the full daily brief. Operate in deep work mode, don't just report data,
 synthesize it. Read like a chief of staff who already did the thinking.
@@ -156,60 +237,13 @@ OPEN ROLES (verified listings worth applying to)
 the reader. Real numbers as fuel, not the point. No generic filler.
 ```
 
-### My agents
-
-Past `/daily-full`, these are the commands I actually reach for most:
-
-**`/log`**: feeds anything, a learning, a recap, a reflection, straight into the vault and files it without me deciding where it goes. My most-used command by a wide margin.
+**`lc-coach`**: wraps LeetCode practice in a status brief, a gamified XP/streak layer, and a closing affirmation, so it's a habit instead of a chore.
 
 ```
-# /log
-Classify the input, then route it.
+# lc-coach (Skill)
+description: Use only when the user explicitly starts a LeetCode practice
+session or invokes /lc-coach by name.
 
-| Type               | Destination                        |
-|---------------------|--------------------------------------|
-| Technical learning  | Knowledge note, right subfolder      |
-| Daily activity      | Today's log, work section            |
-| Personal            | Today's log, personal section        |
-| Mix                 | Split and file each part             |
-
-Extend an existing note if one fits, otherwise create a new one with a source
-line and a related-notes link. Commit immediately after writing.
-```
-
-**`/lint`**: runs every two weeks and audits the vault so I don't have to notice what's gone stale on my own.
-
-```
-# /lint
-Every 2 weeks, check for:
-- knowledge gaps (concepts mentioned, never given a note)
-- people gaps (names mentioned, no page yet)
-- stale items (todo-style folders untouched 14+ days)
-- empty folders that should have content by now
-- stale paths (CLAUDE.md vs real folder structure)
-- pattern topics (mentioned 3+ separate days, deserves a note)
-- broken [[links]]
-Regenerate the knowledge index. Report as a short itemized list, then ask
-what to create.
-```
-
-**`/cmt` and `/yur`**: make auto-commit a rule, not a suggestion. `/cmt` stages and commits, `/yur` does the same and pushes. My vault is closing in on a thousand commits this way.
-
-```
-# /cmt
-Check git status/diff, pick the right type (feat/fix/refactor/docs/chore/
-test/style/perf), write an imperative message under 72 characters, commit.
-No AI attribution ever. One logical change per commit.
-
-# /yur
-Check for uncommitted changes (run /cmt first if needed), fetch, rebase on a
-personal branch or merge on a shared one, stop on conflicts, push, confirm.
-```
-
-**`/lc-coach`**: wraps LeetCode practice in a status brief, a gamified XP/streak layer, and a closing affirmation, so it's a habit instead of a chore.
-
-```
-# /lc-coach
 Opening brief: streak, weekly count, progress through a fixed problem set,
 today's assigned problem, an open "free play" lane for anything else.
 
@@ -226,34 +260,46 @@ don't soften, only the delivery does, the one deliberate carve-out from
 everything else's default directness.
 ```
 
-**`/tutor`**: re-explains something already covered, at the plainest level possible, for when an explanation landed too technical or too fast.
+**`quiz`**: for school specifically, once the semester's in session. Active-recall quiz mode, one question at a time, grades honestly, tracks misses, closes with a score summary.
 
 ```
-# /tutor
-Re-explain the most recent substantive explanation (or a named topic/slice),
-plain language first, define every term. Use analogies grounded in something
-real, never a made-up hypothetical. Split into short labeled sections.
-Actually re-derive it, don't repeat the same wording. Conversation-only
-unless separately told to log it.
-```
+# quiz (Skill)
+description: Use only when the user explicitly asks to be quizzed or invokes
+/quiz by name.
 
-**`/quiz`**: for school specifically, once the semester's in session. Active-recall quiz mode, one question at a time, grades honestly, tracks misses, closes with a score summary.
-
-```
-# /quiz
 One question at a time, don't move on until answered, no revealing the
 answer early. Grade honestly (correct/partial/wrong), briefly explain misses
 before the next question. Vary difficulty and angle. Default 8-10 questions
 per session, close with a score summary and what to revisit.
 ```
 
-**`/eod`**: closes the day, what shipped, what's pending, one grounded closing line, a nudge to log before I close out.
+**`eod`**: closes the day, what shipped, what's pending, one grounded closing line, a nudge to log before I close out.
 
 ```
-# /eod
+# eod (Skill)
+description: Use only when the user explicitly wraps up their day or invokes
+/eod by name.
+
 Check today's log and this week's file for open tasks, check today's
 practice count, output shipped/pending/wins/tomorrow. One direct closing
 sentence, not generic. Ask: "want to run /log before you close out?"
+```
+
+### Commands
+
+Simple and deterministic enough that skill machinery would be overkill. Always explicit.
+
+**`cmt` and `yur`**: make auto-commit a rule, not a suggestion. `cmt` stages and commits, `yur` does the same and pushes. My vault is closing in on a thousand commits this way.
+
+```
+# /cmt
+Check git status/diff, pick the right type (feat/fix/refactor/docs/chore/
+test/style/perf), write an imperative message under 72 characters, commit.
+No AI attribution ever. One logical change per commit.
+
+# /yur
+Check for uncommitted changes (run /cmt first if needed), fetch, rebase on a
+personal branch or merge on a shared one, stop on conflicts, push, confirm.
 ```
 
 ---

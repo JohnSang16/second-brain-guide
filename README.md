@@ -1,6 +1,16 @@
 # Obsidian + Claude Code: A Student's Second Brain
 
-Obsidian holds your notes as linked Markdown. Claude Code reads and writes to them as an agent. Together, you get a knowledge base that updates itself instead of one you maintain by hand. Built and used daily as a CS student running an internship, a student org, classes, and a FAANG-prep grind at once.
+## The problem
+
+Before this, my actual situation looked like:
+
+- An internship, a student org leadership role, classes, and a FAANG-prep grind running at once, re-explaining all of it to an AI chat every single session
+- A backlog of notes scattered across Google Docs, no structure, no way to tell if I'd already learned something
+- Goals and priorities that only lived in my head, so "what should I focus on" answers from an AI were generic, not grounded in what I'd actually committed to
+- LeetCode practice that felt like a chore, no visible progress, no reason to protect the streak
+- Daily work and learnings at my internship that either went nowhere or sat in a notes app no agent could read
+
+Obsidian holds your notes as linked Markdown. Claude Code reads and writes to them as an agent. Together, that's a knowledge base that updates itself instead of one you maintain by hand.
 
 - [The idea](#the-idea): why Obsidian plus Claude Code beats either one alone
 - [Quick setup](#quick-setup): two installs, that's the whole technical lift

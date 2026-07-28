@@ -320,6 +320,20 @@ From what I already lean on, the obvious ones to spin up:
 - **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump.
 - **job-scout agent** — part job finder, part `lc-coach` for my whole career. It scours the most recent changes to anything FAANG-related in my vault, tells me the highest-ROI things to work on next so I stay focused, then hands back verified open roles plus a closing affirmation in the same voice the rest of the system runs on.
 
+### The orchestrator: agents on a schedule
+
+Agents solve the "goes off and does the whole job alone" problem. They don't solve "remembers to run." That's what an orchestrator is for: one routine, on a `launchd` schedule, that fires the other agents in order and only interrupts me for the calls that actually need judgment.
+
+Mine runs daily, unattended, and does three things every pass:
+
+1. **Staleness check** against each tracker file's own self-declared due dates, if the fix is mechanical (a due date that just needs bumping to the next cadence), patch it directly, otherwise flag it for me instead of guessing.
+2. **Weekly `lint` sweep** — checks whether one already ran in the last 7 days before spawning the vault-audit agent again, so it doesn't duplicate work.
+3. **Live vetting** — spawns the job-scout agent, but with one addition on top of its own rules: never trust a search snippet, fetch the real posting page for every candidate role and confirm the date, location, and eligibility from the actual content before it's allowed onto my list.
+
+Everything that needed a judgment call gets collected into one recommendations file, overwritten each run, not appended, so it's always current state, never a growing log. It commits what it fixed mechanically, and stops there: **it never pushes**, that stays mine to review and send.
+
+The pattern in general: once you have two or three agents you trust to run alone, the next lever isn't a better agent, it's a conductor that decides when to wake each one up and what's worth surfacing versus fixing quietly.
+
 ---
 
 ## Syncing across devices

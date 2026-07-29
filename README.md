@@ -122,7 +122,7 @@ Three layers: one thing that runs without me asking, a bench of things I ask for
 
 The single highest-leverage piece of the three.
 
-**What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler), the mechanism matters less than the effect: I never invoke it, it just fires once a day whether or not I've opened Claude Code.
+**What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler). I never invoke it, it just fires once a day whether or not I've opened Claude Code.
 
 **Does it only run when I trigger something myself?** No, that's the point, every skill below only runs when I ask. The orchestrator is the exception, and it's also one half of a loop: closing out my day (`eod`, under Skills below) hands it a priority to check on, so it's not just running on a timer, it's following up on what I flagged the night before.
 

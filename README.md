@@ -4,17 +4,11 @@ Simple & straightforward guide to offloading your brain to ai if you're a chud l
 
 ## Quick definitions
 
-- **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together.
-- **Claude Code:** an AI agent that reads and writes the files in a folder.
+- **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together. (free) [obsidian.md](https://obsidian.md/download)
+- **Claude Code:** an AI agent that reads and writes the files in a folder. (~$20/mo, Claude Pro) [claude.com/product/claude-code](https://claude.com/product/claude-code)
 - **Together:** point Claude Code at your Obsidian folder and you get a second brain, notes an AI keeps organized and an assistant that already knows your goals instead of one you re-brief every session.
 
-### Quick setup
-
-1. **Obsidian** (free): [obsidian.md](https://obsidian.md/download)
-2. **Claude Code** (~$20/mo, Claude Pro): [claude.com/product/claude-code](https://claude.com/product/claude-code)
-3. Make your vault its own folder, open Claude Code from that folder
-
-That's the whole technical setup. Everything past this point is structure and habit, not tools.
+Install both, make your vault its own folder, open Claude Code from that folder. That's the whole technical setup, everything past this point is structure and habit, not tools. Read [The problem](#the-problem) for the why, or jump straight to [Scaffolding from zero](#scaffolding-from-zero) to actually set it up.
 
 ---
 
@@ -34,9 +28,9 @@ The vault fixes all of it.
 
 ## Index
 
-- [The idea](#the-idea): why Obsidian plus Claude Code beats either one alone
+- [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
-- [My setup](#my-setup): the actual folder structure
+- [My setup](#my-setup): a reference folder structure, copy what's useful
 - [The orchestrator](#the-orchestrator): the one thing that runs without me asking
 - [How I actually use it](#how-i-actually-use-it): the skills/commands bench, plus the agents behind it
 - [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
@@ -44,11 +38,9 @@ The vault fixes all of it.
 
 ---
 
-## The idea
+## The solution
 
-Claude Code already reads your whole working folder as context. What it doesn't have is a durable, agent-agnostic place to keep what it learns about you.
-
-Obsidian is that place:
+Pair Obsidian with Claude Code. Claude Code already reads your whole working folder as context, it just has nowhere durable to keep what it learns about you. Obsidian is that place:
 
 - **Notes are Markdown.** Same format Claude Code already reads and writes.
 - **The vault is just a folder.** Point Claude Code at it, full context, no uploads, no separate memory system to babysit.
@@ -94,6 +86,8 @@ The one file that actually matters is **`CLAUDE.md`** at the vault root, read at
 ---
 
 ## My setup
+
+Everything above this section is all you actually need to have a working vault. What's below is just a reference, my own folder structure, so you have one real example to copy from instead of starting blank.
 
 ```
 vault/

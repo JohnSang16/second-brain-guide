@@ -90,7 +90,8 @@ The one file that actually matters is **`CLAUDE.md`** at the vault root, read at
 ### Already sitting on a pile of notes?
 
 - Chances are you're not starting from a blank vault. Mine was a pile of Google Docs with no real structure.
-- Connect the Google Drive MCP and point Claude Code at the existing docs, it pulls them into the vault as Markdown notes and reshapes them into your structure.
+- Connect whatever MCP fits where your notes already live (Google Drive, Notion, Dropbox, whatever), point Claude Code at the existing docs, it pulls them into the vault as Markdown notes and reshapes them into your structure. Mine was Google Drive.
+- No MCP available or it doesn't cooperate? Just export your data (most tools support a plain export) and drop the files into the vault folder directly, Claude Code can still read and reshape them from there.
 - This is the main advantage of running Claude Code with MCPs wired in: a multi-day migration chore becomes one conversation.
 
 ---

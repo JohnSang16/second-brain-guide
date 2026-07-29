@@ -119,15 +119,13 @@ The single highest-leverage piece of this whole system. Everything under [How I 
 
 **What it is:** one routine on a `launchd` schedule (macOS's built-in cron). It is not a skill and I never invoke it. It fires on its own, once a day, whether or not I've opened Claude Code that day.
 
-**Does it only run when I trigger a skill like `daily-full`?** No, and that's the point. `daily-full` and every other skill in this guide only run when I ask for them. The orchestrator is the one exception: it wakes up unattended and decides what needs my attention, instead of waiting for me to notice.
+**Does it only run when I trigger something myself?** No, and that's the point. Every skill in this guide only runs when I ask for it. The orchestrator is the one exception, it wakes up unattended once a day. It's also one half of a loop: closing out my day (covered under [How I actually use it](#how-i-actually-use-it)) hands the orchestrator a priority to check on, so it's not just running on a timer, it's following up on what I flagged the night before.
 
 **What it does, in order, every run:**
-1. **EOD handoff check.** If last night's `eod` left a handoff behind (see [How I actually use it](#how-i-actually-use-it)), check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
+1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
 2. **Staleness check** against each tracker file's own self-declared due dates. Mechanical fixes (a due date that just needs bumping) get patched directly. Anything ambiguous gets flagged for me instead of guessed.
 3. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
 4. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
-
-**The closed loop:** `eod` and the orchestrator used to be two disconnected systems, one closed my day, the other ran unattended, and nothing passed between them. Now `eod` ends its own run by writing a small handoff file with tomorrow's priority. The orchestrator's first step every morning is reading that file back. That's the loop: I close out at night, the orchestrator checks in the morning whether what I flagged actually happened.
 
 **What it touches:** the eod handoff file (reads then clears it), tracker files (patches due dates directly), the vault-audit and job-scout agents (by invoking them), and one recommendations file that gets overwritten each run, never appended, so it's always current state, not a growing log. It commits what it fixed mechanically. **It never pushes**, that stays mine to review and send.
 

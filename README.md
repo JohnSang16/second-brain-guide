@@ -20,7 +20,7 @@ Before this, my actual situation looked like:
 - LeetCode practice that felt like a chore, no visible progress, no reason to protect the streak
 - Daily work and learnings at my internship that either went nowhere or sat in a notes app no agent could read
 
-The vault fixes all of it. Full index of what's ahead is right below.
+The vault fixes all of it.
 
 ---
 

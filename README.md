@@ -116,23 +116,17 @@ vault/
 
 ## How I actually use it
 
-Three layers: one thing that runs without me asking, a bench of things I ask for by name or that fire on their own mid-conversation, and a set of agents that go off and do a whole job alone.
-
 ### The orchestrator
 
-The single highest-leverage piece of the three. Its main job: keep the vault live and clean without me babysitting it. It does that two ways: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opens every night, that's the wrap-up of everything I did that day, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker dates, sweeping for `lint` issues, and vetting job listings before they land on my list.
+**Purpose:** the single highest-leverage piece of the three, it keeps the vault live and clean without me babysitting it. It does that two ways: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opens every night, that's the wrap-up of everything I did that day, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker checkpoints, sweeping for `lint` issues, and vetting job listings before they land on my list.
 
 **What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler). I never invoke it, it just fires once a day whether or not I've opened Claude Code.
 
-**Does it only run when I trigger something myself?** No, that's the point, every skill below only runs when I ask. The orchestrator is the exception, it wakes up unattended.
-
-**What it does, in order, every run:**
+**Workflow, every run:**
 1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
-2. **Staleness check** against each tracker file's own self-declared due dates. Mechanical fixes (a due date that just needs bumping) get patched directly. Anything ambiguous gets flagged for me instead of guessed.
+2. **Staleness check** against each tracker file's own self-declared checkpoint, like a LeetCode tracker's "recheck by" date. The point isn't the date itself, it's making sure `daily-full` keeps surfacing real, current priorities instead of something already handled or long overdue. If nothing changed by that checkpoint and the fix is mechanical (push it to the next cycle), it gets patched directly. Anything that actually needs a judgment call, dropped vs. just not logged yet, gets flagged for me instead.
 3. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
 4. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
-
-**What it touches:** the eod handoff file (reads then clears it), tracker files (patches due dates directly), the vault-audit and job-scout agents (by invoking them), and one recommendations file that gets overwritten each run, never appended, so it's always current state, not a growing log. It commits what it fixed mechanically. **It never pushes**, that stays mine to review and send.
 
 **Benefits:**
 - Follows up on last night's priority without me having to remember to ask

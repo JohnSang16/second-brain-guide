@@ -125,8 +125,8 @@ vault/
 **Workflow, every run:**
 1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
 2. **Staleness check** against each tracker file's own self-declared checkpoint, like a LeetCode tracker's "recheck by" date. The point isn't the date itself, it's making sure `daily-full` keeps surfacing real, current priorities instead of something already handled or long overdue. If nothing changed by that checkpoint and the fix is mechanical (push it to the next cycle), it gets patched directly. Anything that actually needs a judgment call, dropped vs. just not logged yet, gets flagged for me instead.
-3. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
-4. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
+3. **Weekly `lint` sweep**, via the vault-audit agent (see [Agents](#agents) for how it avoids duplicate runs).
+4. **Live job vetting**, via the job-scout agent (see [Agents](#agents) for the extra verification rule it adds).
 
 **Benefits:**
 - Follows up on last night's priority without me having to remember to ask
@@ -341,8 +341,8 @@ Skills and commands run in my main chat. An agent doesn't, it's a separate Claud
 The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedule, but each one below also runs standalone any time I call it directly.
 
 - **research agent** — instead of me sitting in Google, opening tabs and copy-pasting, I hand it a topic and it does the whole dig: pulls from the best, highly-rated sources for that specific thing, cites them, and logs it back as a knowledge note using the conventions and folder structure it already knows from my vault. Isolated research in, a finished linked note in the right place out.
-- **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump. The orchestrator invokes it weekly; I can also run it standalone any time I want a deep sweep outside that cadence.
-- **job-scout agent** — part job finder, part `lc-coach` for my whole career. It scours the most recent changes to anything FAANG-related in my vault, tells me the highest-ROI things to work on next so I stay focused, then hands back verified open roles plus a closing affirmation in the same voice the rest of the system runs on.
+- **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump. The orchestrator calls it once a week, checking whether a sweep already ran in the last 7 days before running another, I can also run it standalone any time I want a deep sweep outside that cadence.
+- **job-scout agent** — part job finder, part `lc-coach` for my whole career. It scours the most recent changes to anything FAANG-related in my vault, tells me the highest-ROI things to work on next so I stay focused, then hands back verified open roles plus a closing affirmation in the same voice the rest of the system runs on. When the orchestrator calls it each morning, it adds one rule on top of the agent's own vetting: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
 
 ---
 

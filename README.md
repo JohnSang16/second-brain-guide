@@ -118,9 +118,9 @@ vault/
 
 ### The orchestrator
 
-**Purpose:** the single highest-leverage piece of the three, it keeps the vault live and clean without me babysitting it. It does that two ways: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opens every night, that's the wrap-up of everything I did that day, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker checkpoints, sweeping for `lint` issues, and vetting job listings before they land on my list.
+**What it is:** my own agent's dispatcher, it wakes up on its own each morning and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler, mine fires around 8:30am). I never invoke it.
 
-**What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler). I never invoke it, it just fires once a day whether or not I've opened Claude Code.
+**Purpose:** keep the vault live and clean without me babysitting it. One morning run covers both jobs, no separate run needed: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opened the night before, checking whether what I flagged actually got done, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker checkpoints, sweeping for `lint` issues, and vetting job listings before they land on my list, all before I'd normally ask for the daily brief.
 
 **Workflow, every run:**
 1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.

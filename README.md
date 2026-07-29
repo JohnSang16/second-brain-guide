@@ -20,13 +20,18 @@ Before this, my actual situation looked like:
 - LeetCode practice that felt like a chore, no visible progress, no reason to protect the streak
 - Daily work and learnings at my internship that either went nowhere or sat in a notes app no agent could read
 
-The vault fixes all of it. The rest of this guide, in order:
+The vault fixes all of it. Full index of what's ahead is right below.
+
+---
+
+## Index
 
 - [The idea](#the-idea): why Obsidian plus Claude Code beats either one alone
 - [Quick setup](#quick-setup): two installs, that's the whole technical lift
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): the actual folder structure
-- [How I actually use it](#how-i-actually-use-it): the daily-full secretary, plus the skills/commands bench
+- [The orchestrator](#the-orchestrator): the one thing that runs without me asking
+- [How I actually use it](#how-i-actually-use-it): the skills/commands bench, plus the agents behind it
 - [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
 - [Notes](#notes): what mattered more than the folders themselves
 
@@ -113,6 +118,30 @@ vault/
 - **Knowledge notes are separate from daily logs.** Logs are a stream of what happened. Knowledge notes are distilled, linked, filed into topic subfolders.
 - **`memory/` is not a task list.** It holds durable facts, not in-progress state.
 - **Skills and commands are organized twice on purpose.** Flat in `.claude/` for Claude Code, categorized in `_agents/<type>/<category>/` for humans browsing the repo.
+
+---
+
+## The orchestrator
+
+The single highest-leverage piece of this whole system. Everything under [How I actually use it](#how-i-actually-use-it) exists to be called by this.
+
+**What it is:** one routine on a `launchd` schedule (macOS's built-in cron). It is not a skill and I never invoke it. It fires on its own, once a day, whether or not I've opened Claude Code that day.
+
+**Does it only run when I trigger a skill like `daily-full`?** No, and that's the point. `daily-full` and every other skill in this guide only run when I ask for them. The orchestrator is the one exception: it wakes up unattended and decides what needs my attention, instead of waiting for me to notice.
+
+**What it does, in order, every run:**
+1. **Staleness check** against each tracker file's own self-declared due dates. Mechanical fixes (a due date that just needs bumping) get patched directly. Anything ambiguous gets flagged for me instead of guessed.
+2. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
+3. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
+
+**What it touches:** tracker files (patches due dates directly), the vault-audit and job-scout agents (by invoking them), and one recommendations file that gets overwritten each run, never appended, so it's always current state, not a growing log. It commits what it fixed mechanically. **It never pushes**, that stays mine to review and send.
+
+**Benefits:**
+- Catches staleness before I notice it myself, no manual check-ins needed
+- Never duplicates a `lint` sweep, checks recent run history first
+- Filters out dead or fake job listings by fetching the real page, not trusting a search snippet
+- Keeps one current recommendations file instead of a growing pile of one-off reports
+- Never pushes on its own, nothing lands remotely without my review
 
 ---
 
@@ -310,25 +339,11 @@ Check for uncommitted changes (run /cmt first if needed), fetch, rebase on a
 personal branch or merge on a shared one, stop on conflicts, push, confirm.
 ```
 
-### Agents, where this goes next
+### Agents
 
 Skills and commands both run inside my main chat. An agent doesn't: it's a separate Claude with its own context window that goes off, does the whole messy job alone, pulls whatever skills it needs, and hands back just the result, not the transcript. That keeps my main thread clean and lets me run a few at once. The tell that something should be an agent instead of a skill: it reads across a ton of files or the web, it runs long, and I only care about what it hands back at the end.
 
-### The orchestrator: the biggest lever here
-
-Agents solve "goes off and does the whole job alone." They don't solve "remembers to run, and knows when to wake the others up." That's what an orchestrator is for: one routine, on a `launchd` schedule, that calls the other agents below in order, on its own, and only interrupts me for the calls that actually need judgment. It's the single highest-leverage piece of this whole system, everything else in this section exists to be invoked by it.
-
-Mine runs daily, unattended, and does three things every pass:
-
-1. **Staleness check** against each tracker file's own self-declared due dates. If the fix is mechanical (a due date that just needs bumping to the next cadence), patch it directly, otherwise flag it for me instead of guessing.
-2. **Weekly `lint` sweep** — checks whether the vault-audit agent already ran in the last 7 days before invoking it again, so it doesn't duplicate work.
-3. **Live vetting** — invokes the job-scout agent, but with one addition on top of its own rules: never trust a search snippet, fetch the real posting page for every candidate role and confirm the date, location, and eligibility from the actual content before it's allowed onto my list.
-
-Everything that needed a judgment call gets collected into one recommendations file, overwritten each run, not appended, so it's always current state, never a growing log. It commits what it fixed mechanically, and stops there: **it never pushes**, that stays mine to review and send.
-
-The pattern in general: once you have two or three agents you trust to run alone, the next lever isn't a better agent, it's a conductor that decides when to wake each one up and what's worth surfacing versus fixing quietly. That's also why the agents below stay separate, standalone files instead of getting absorbed into the orchestrator itself: it calls them, it doesn't reimplement them, so I can still run any one of them by hand without kicking off a full orchestrator pass.
-
-### The agents it calls
+The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedule, but each one below also runs standalone any time I call it directly.
 
 - **research agent** — instead of me sitting in Google, opening tabs and copy-pasting, I hand it a topic and it does the whole dig: pulls from the best, highly-rated sources for that specific thing, cites them, and logs it back as a knowledge note using the conventions and folder structure it already knows from my vault. Isolated research in, a finished linked note in the right place out.
 - **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump. The orchestrator invokes it weekly; I can also run it standalone any time I want a deep sweep outside that cadence.

@@ -122,13 +122,17 @@ The single highest-leverage piece of this whole system. Everything under [How I 
 **Does it only run when I trigger a skill like `daily-full`?** No, and that's the point. `daily-full` and every other skill in this guide only run when I ask for them. The orchestrator is the one exception: it wakes up unattended and decides what needs my attention, instead of waiting for me to notice.
 
 **What it does, in order, every run:**
-1. **Staleness check** against each tracker file's own self-declared due dates. Mechanical fixes (a due date that just needs bumping) get patched directly. Anything ambiguous gets flagged for me instead of guessed.
-2. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
-3. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
+1. **EOD handoff check.** If last night's `eod` left a handoff behind (see [How I actually use it](#how-i-actually-use-it)), check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
+2. **Staleness check** against each tracker file's own self-declared due dates. Mechanical fixes (a due date that just needs bumping) get patched directly. Anything ambiguous gets flagged for me instead of guessed.
+3. **Weekly `lint` sweep**, checks whether the vault-audit agent already ran in the last 7 days before calling it again, so it never duplicates work.
+4. **Live job vetting**, calls the job-scout agent with one rule added on top of its own: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
 
-**What it touches:** tracker files (patches due dates directly), the vault-audit and job-scout agents (by invoking them), and one recommendations file that gets overwritten each run, never appended, so it's always current state, not a growing log. It commits what it fixed mechanically. **It never pushes**, that stays mine to review and send.
+**The closed loop:** `eod` and the orchestrator used to be two disconnected systems, one closed my day, the other ran unattended, and nothing passed between them. Now `eod` ends its own run by writing a small handoff file with tomorrow's priority. The orchestrator's first step every morning is reading that file back. That's the loop: I close out at night, the orchestrator checks in the morning whether what I flagged actually happened.
+
+**What it touches:** the eod handoff file (reads then clears it), tracker files (patches due dates directly), the vault-audit and job-scout agents (by invoking them), and one recommendations file that gets overwritten each run, never appended, so it's always current state, not a growing log. It commits what it fixed mechanically. **It never pushes**, that stays mine to review and send.
 
 **Benefits:**
+- Follows up on last night's priority without me having to remember to ask
 - Catches staleness before I notice it myself, no manual check-ins needed
 - Never duplicates a `lint` sweep, checks recent run history first
 - Filters out dead or fake job listings by fetching the real page, not trusting a search snippet
@@ -302,7 +306,7 @@ before the next question. Vary difficulty and angle. Default 8-10 questions
 per session, close with a score summary and what to revisit.
 ```
 
-**`eod`**: closes the day, what shipped, what's pending, one grounded closing line, a nudge to log before I close out.
+**`eod`**: closes the day, what shipped, what's pending, one grounded closing line, a nudge to log before I close out. It also hands off to the [orchestrator](#the-orchestrator): a scoped cleanup of just today's files, then a small handoff file with tomorrow's priority that the orchestrator reads back on its next run.
 
 ```
 # eod (Skill)
@@ -312,6 +316,10 @@ description: Use only when the user explicitly wraps up their day or invokes
 Check today's log and this week's file for open tasks, check today's
 practice count, output shipped/pending/wins/tomorrow. One direct closing
 sentence, not generic. Ask: "want to run /log before you close out?"
+
+Then: scoped vault-audit cleanup limited to today's changed files (not a
+full sweep). Write a handoff file with tomorrow's priority, overwritten
+each night, for the orchestrator to check against the next morning.
 ```
 
 ### Commands

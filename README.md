@@ -8,7 +8,7 @@ Simple & straightforward guide to offloading your brain to ai if you're a chud l
 - **Claude Code:** an AI agent that reads and writes the files in a folder. (~$20/mo, Claude Pro) [claude.com/product/claude-code](https://claude.com/product/claude-code)
 - **Together:** point Claude Code at your Obsidian folder and you get a second brain, notes an AI keeps organized and an assistant that already knows your goals instead of one you re-brief every session.
 
-Install both, make your vault its own folder, open Claude Code from that folder. That's the whole technical setup, everything past this point is structure and habit, not tools. Read [The problem](#the-problem) for the why, or jump straight to [Scaffolding from zero](#scaffolding-from-zero) to actually set it up.
+Install both, make your vault its own folder, open Claude Code from that folder. That's the whole technical setup. Read [The problem](#the-problem) for the why, or jump straight to [Scaffolding from zero](#scaffolding-from-zero) to actually set it up.
 
 ---
 

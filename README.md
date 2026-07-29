@@ -31,10 +31,11 @@ The vault fixes all of it.
 - [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): a reference folder structure, copy what's useful
-- [The orchestrator](#the-orchestrator): the one thing that runs without me asking
-- [How I actually use it](#how-i-actually-use-it): the skills/commands bench, plus the agents behind it
+- [How I actually use it](#how-i-actually-use-it): the orchestrator, the skills/commands bench, and the agents behind it
 - [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
 - [Notes](#notes): what mattered more than the folders themselves
+
+**In a hurry?** [Quick definitions](#quick-definitions) plus [The solution](#the-solution) is the whole pitch in about two minutes. Want the in-depth version? Read straight through, that's what the rest of this is for.
 
 ---
 
@@ -79,7 +80,7 @@ The one file that actually matters is **`CLAUDE.md`** at the vault root, read at
 ### Already sitting on a pile of notes?
 
 - Chances are you're not starting from a blank vault. Mine was a pile of Google Docs with no real structure.
-- Connect whatever MCP fits where your notes already live (Google Drive, Notion, Dropbox, whatever), point Claude Code at the existing docs, it pulls them into the vault as Markdown notes and reshapes them into your structure. Mine was Google Drive.
+- Connect whatever MCP fits where your notes already live (Google Drive, Notion, Dropbox), point Claude Code at the docs, it pulls them in as Markdown and reshapes them into your structure. Mine was Google Drive.
 - No MCP available or it doesn't cooperate? Just export your data (most tools support a plain export) and drop the files into the vault folder directly, Claude Code can still read and reshape them from there.
 - This is the main advantage of running Claude Code with MCPs wired in: a multi-day migration chore becomes one conversation.
 
@@ -113,13 +114,17 @@ vault/
 
 ---
 
-## The orchestrator
+## How I actually use it
 
-The single highest-leverage piece of this whole system. Everything under [How I actually use it](#how-i-actually-use-it) exists to be called by this.
+Three layers: one thing that runs without me asking, a bench of things I ask for by name or that fire on their own mid-conversation, and a set of agents that go off and do a whole job alone.
 
-**What it is:** one routine on a `launchd` schedule (macOS's built-in cron). It is not a skill and I never invoke it. It fires on its own, once a day, whether or not I've opened Claude Code that day.
+### The orchestrator
 
-**Does it only run when I trigger something myself?** No, and that's the point. Every skill in this guide only runs when I ask for it. The orchestrator is the one exception, it wakes up unattended once a day. It's also one half of a loop: closing out my day (covered under [How I actually use it](#how-i-actually-use-it)) hands the orchestrator a priority to check on, so it's not just running on a timer, it's following up on what I flagged the night before.
+The single highest-leverage piece of the three.
+
+**What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler), the mechanism matters less than the effect: I never invoke it, it just fires once a day whether or not I've opened Claude Code.
+
+**Does it only run when I trigger something myself?** No, that's the point, every skill below only runs when I ask. The orchestrator is the exception, and it's also one half of a loop: closing out my day (`eod`, under Skills below) hands it a priority to check on, so it's not just running on a timer, it's following up on what I flagged the night before.
 
 **What it does, in order, every run:**
 1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
@@ -137,9 +142,7 @@ The single highest-leverage piece of this whole system. Everything under [How I 
 - Keeps one current recommendations file instead of a growing pile of one-off reports
 - Never pushes on its own, nothing lands remotely without my review
 
----
-
-## How I actually use it
+### Skills
 
 Most of what I run I never type. It fires on its own the moment it's relevant: I say "log this" and it files into the right folder without me picking one, I say "I don't get it" and the tutor re-explains the last thing plainer. Those are Skills, and the auto-firing ones are the ones I lean on hardest.
 
@@ -147,7 +150,7 @@ The heavier stuff I still want to pull the trigger on myself, the morning brief,
 
 The line I actually split on: if it should be able to fire without me, or it grew past a single prompt block, it's a Skill. If it's a one-shot template I'll always trigger by hand, it's a Command.
 
-### The bench
+#### The bench
 
 | Name | Type | Trigger | Does |
 |---|---|---|---|
@@ -161,7 +164,7 @@ The line I actually split on: if it should be able to fire without me, or it gre
 | `cmt` | Command | explicit only | stage and commit |
 | `yur` | Command | explicit only | commit and push |
 
-### Skills, auto-trigger
+#### Skills, auto-trigger
 
 These fire on their own when the moment matches, no slash typing required.
 
@@ -218,7 +221,7 @@ Actually re-derive it, don't repeat the same wording. Conversation-only
 unless separately told to log it.
 ```
 
-### Skills, explicit only
+#### Skills, explicit only
 
 Deliberate enough that I don't want them firing on a stray mention, but complex enough to outgrow a plain command.
 
@@ -320,7 +323,7 @@ full sweep). Write a handoff file with tomorrow's priority, overwritten
 each night, for the orchestrator to check against the next morning.
 ```
 
-### Commands
+#### Commands
 
 Simple and deterministic enough that skill machinery would be overkill. Always explicit.
 
@@ -339,7 +342,7 @@ personal branch or merge on a shared one, stop on conflicts, push, confirm.
 
 ### Agents
 
-Skills and commands both run inside my main chat. An agent doesn't: it's a separate Claude with its own context window that goes off, does the whole messy job alone, pulls whatever skills it needs, and hands back just the result, not the transcript. That keeps my main thread clean and lets me run a few at once. The tell that something should be an agent instead of a skill: it reads across a ton of files or the web, it runs long, and I only care about what it hands back at the end.
+Skills and commands run in my main chat. An agent doesn't, it's a separate Claude that goes off, does the whole job alone, and hands back just the result. Use one when the job reads across a ton of files or the web, runs long, and I only care about the outcome.
 
 The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedule, but each one below also runs standalone any time I call it directly.
 
@@ -367,6 +370,6 @@ The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedu
 - **`CLAUDE.md` is the highest-leverage file.** Everything downstream depends on it staying current.
 - **Let the agent do the admin work.** Filing, linking, flagging stale notes, that's the busy work a self-maintaining vault is supposed to remove.
 - **Public and private don't mix in one repo.** Keep a sanitized version separate from the vault with your real logs, goals, and personal data.
-- **This is my scope, not the ceiling.** Right now my whole focus is career and school, so that's what mine is built around. Yours should be shaped around whatever you're actually chasing. Once the semester starts I'm adding skills to streamline my student-org work, and eventually stuff for personal interests too, so this repo stays active and keeps updating. Swap in whatever MCPs, tooling, skills, and agents fit your life, and check back.
+- **This is my scope, not the ceiling.** My focus right now is career and school, so that's what mine is built around, yours should be shaped around whatever you're chasing. I'm adding student-org and personal-interest skills as the semester goes, so this repo stays active. Swap in whatever MCPs, tooling, skills, and agents fit your life, and check back.
 
 > Whatever you do with this is on you. Sensitive stuff especially, school records, other people's info, employer data, handle it however you're actually supposed to.

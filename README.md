@@ -8,6 +8,14 @@ Simple & straightforward guide to offloading your brain to ai if you're a chud l
 - **Claude Code:** an AI agent that reads and writes the files in a folder.
 - **Together:** point Claude Code at your Obsidian folder and you get a second brain, notes an AI keeps organized and an assistant that already knows your goals instead of one you re-brief every session.
 
+### Quick setup
+
+1. **Obsidian** (free): [obsidian.md](https://obsidian.md/download)
+2. **Claude Code** (~$20/mo, Claude Pro): [claude.com/product/claude-code](https://claude.com/product/claude-code)
+3. Make your vault its own folder, open Claude Code from that folder
+
+That's the whole technical setup. Everything past this point is structure and habit, not tools.
+
 ---
 
 ## The problem
@@ -27,7 +35,6 @@ The vault fixes all of it.
 ## Index
 
 - [The idea](#the-idea): why Obsidian plus Claude Code beats either one alone
-- [Quick setup](#quick-setup): two installs, that's the whole technical lift
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): the actual folder structure
 - [The orchestrator](#the-orchestrator): the one thing that runs without me asking
@@ -59,16 +66,6 @@ Straight across from the problems above:
 - Priorities live in the vault, so "what should I focus on" is grounded in what I committed to, not generic
 - LeetCode has a visible streak and a reason to protect it
 - Daily work and learnings get filed somewhere the agent can read, instead of dying in a notes app
-
----
-
-## Quick setup
-
-1. **Obsidian** (free): [obsidian.md](https://obsidian.md/download)
-2. **Claude Code** (~$20/mo, Claude Pro): [claude.com/product/claude-code](https://claude.com/product/claude-code)
-3. Make your vault its own folder, open Claude Code from that folder
-
-That's the whole technical setup. Everything past this point is structure and habit, not tools.
 
 ---
 

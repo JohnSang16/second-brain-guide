@@ -120,11 +120,11 @@ Three layers: one thing that runs without me asking, a bench of things I ask for
 
 ### The orchestrator
 
-The single highest-leverage piece of the three.
+The single highest-leverage piece of the three. Its main job: keep the vault live and clean without me babysitting it. It does that two ways: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opens every night, that's the wrap-up of everything I did that day, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker dates, sweeping for `lint` issues, and vetting job listings before they land on my list.
 
 **What it is:** my own agent's dispatcher, it wakes up on its own and deploys the other agents below to do the work. Under the hood that's a scheduled cron job (`launchd`, macOS's built-in scheduler). I never invoke it, it just fires once a day whether or not I've opened Claude Code.
 
-**Does it only run when I trigger something myself?** No, that's the point, every skill below only runs when I ask. The orchestrator is the exception, and it's also one half of a loop: closing out my day (`eod`, under Skills below) hands it a priority to check on, so it's not just running on a timer, it's following up on what I flagged the night before.
+**Does it only run when I trigger something myself?** No, that's the point, every skill below only runs when I ask. The orchestrator is the exception, it wakes up unattended.
 
 **What it does, in order, every run:**
 1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.

@@ -366,6 +366,7 @@ The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedu
 - **`CLAUDE.md` is the highest-leverage file.** Everything downstream depends on it staying current.
 - **Let the agent do the admin work.** Filing, linking, flagging stale notes, that's the busy work a self-maintaining vault is supposed to remove.
 - **Public and private don't mix in one repo.** Keep a sanitized version separate from the vault with your real logs, goals, and personal data.
+- **Memory picks up your voice, not just facts.** Draft enough in the vault, LinkedIn posts, outreach messages, pitches, and Claude Code's memory starts saving how you actually write, not just what you told it to remember. Ask for a new LinkedIn draft months later and it already writes in your voice, no re-explaining your tone every time.
 - **This is my scope, not the ceiling.** My focus right now is career and school, so that's what mine is built around, yours should be shaped around whatever you're chasing. I'm adding student-org and personal-interest skills as the semester goes, so this repo stays active. Swap in whatever MCPs, tooling, skills, and agents fit your life, and check back.
 
 > Whatever you do with this is on you. Sensitive stuff especially, school records, other people's info, employer data, handle it however you're actually supposed to.

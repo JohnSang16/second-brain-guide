@@ -5,6 +5,7 @@
 - [Quick rundown](#quick-rundown): the two tools and why pairing them works
 - [The problem](#the-problem): what things looked like before this setup
 - [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
+- [The three pillars](#the-three-pillars): experience, interview prep, and studies, tailored to a tech student
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): a reference folder structure, copy what's useful
 - [How I actually use it](#how-i-actually-use-it): the orchestrator, the skills/commands bench, and the agents behind it
@@ -61,6 +62,28 @@ Straight across from the problems above:
 - Priorities live in the vault, so "what should I focus on" is grounded in what I committed to, not generic
 - LeetCode has a visible streak and a reason to protect it
 - Daily work and learnings get filed somewhere the agent can read, instead of dying in a notes app
+
+---
+
+## The three pillars
+
+Everything above is deliberately general. This is what it actually looks like once you point it at three things a tech student is juggling at once: experience, interview prep, and classes.
+
+### Experience: internships, co-op, research
+
+`/scout` and the job-scout agent do the checking for me, instead of me checking anything myself:
+
+- Wired to the GitHub trackers people bookmark and forget to check, `speedyapply/2027-SWE-College-Jobs` and SimplifyJobs's tracker, plus a couple more
+- Layered with a live web/ATS search on top, tailored to the roles and companies I actually care about, not just whatever's on those repos
+- Fed straight into the daily brief automatically, no manual repo-checking, real verified openings are just sitting there when I open my brief
+
+### Interview prep: LeetCode
+
+`lc-coach` and `lc` keep practice from turning into a chore: a streak, gamified XP, a rank ladder, a fixed problem set I'm actually working through instead of picking randomly. Full mechanics are in [Skills, explicit only](#skills-explicit-only), not repeating the whole system here on purpose, build your own version instead of copying mine wholesale.
+
+### Studies: classes
+
+`tutor` and `quiz` cover explaining and testing. The other half is capture: Granola records the lecture while I'm free to actually ask questions instead of transcribing, then the transcript goes into `/log` afterward, which already knows how to file it into the right note or daily log without me deciding where. (Manual today, paste the transcript in after class, not a live auto-pipeline yet.)
 
 ---
 
@@ -125,10 +148,10 @@ vault/
 **Purpose:** keep the vault live and clean without me babysitting it. One morning run covers both jobs, no separate run needed: it closes the loop `eod` ([Skills, explicit only](#skills-explicit-only)) opened the night before, checking whether what I flagged actually got done, so old status gets cleared instead of piling up, and it runs its own vault-hygiene passes on top, catching stale tracker checkpoints, sweeping for `lint` issues, and vetting job listings before they land on my list, all before I'd normally ask for the daily brief.
 
 **Workflow, every run:**
-1. **EOD handoff check.** If last night's close-out left a handoff behind, check whether that flagged priority actually got done. If it did, the handoff gets cleared. If it didn't, it carries into today's digest instead of quietly vanishing.
-2. **Staleness check** against each tracker file's own self-declared checkpoint, like a LeetCode tracker's "recheck by" date. The point isn't the date itself, it's making sure `daily-full` keeps surfacing real, current priorities instead of something already handled or long overdue. If nothing changed by that checkpoint and the fix is mechanical (push it to the next cycle), it gets patched directly. Anything that actually needs a judgment call, dropped vs. just not logged yet, gets flagged for me instead.
-3. **Weekly `lint` sweep**, via the vault-audit agent (see [Agents](#agents) for how it avoids duplicate runs).
-4. **Live job vetting**, via the job-scout agent (see [Agents](#agents) for the extra verification rule it adds).
+1. **EOD handoff check.** Did last night's flagged priority actually get done? Clear it if so, carry it forward if not.
+2. **Staleness check.** Each tracker checks itself against its own "recheck by" date. Mechanical fixes get patched directly, judgment calls get flagged to me.
+3. **Weekly `lint` sweep** via the vault-audit agent, skips if one already ran this week.
+4. **Live job vetting** via the job-scout agent, verifies listings before they land on my list.
 
 **Benefits:**
 - Follows up on last night's priority without me having to remember to ask

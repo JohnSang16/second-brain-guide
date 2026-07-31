@@ -16,7 +16,7 @@ Install both, make your vault its own folder, open Claude Code from that folder.
 
 Before this, my actual situation looked like:
 
-- An internship, a student org leadership role, classes, and a FAANG-prep grind running at once, re-explaining all of it to an AI chat every single session
+- An internship, a student org leadership role, classes, and a FAANG-prep grind running at once, re-explaining all of it to claude every single session
 - A backlog of notes scattered across Google Docs, no structure, no way to tell if I'd already learned something
 - Goals and priorities that only lived in my head, so "what should I focus on" answers from an AI were generic, not grounded in what I'd actually committed to
 - LeetCode practice that felt like a chore, no visible progress, no reason to protect the streak

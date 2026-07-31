@@ -73,7 +73,7 @@ Everything above is deliberately general. This is what it actually looks like on
 
 `/scout` and the job-scout agent do the checking for me, instead of me checking anything myself:
 
-- Wired to the GitHub trackers people bookmark and forget to check, [speedyapply/2027-SWE-College-Jobs](https://github.com/speedyapply/2027-SWE-College-Jobs) and [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships), plus a couple more
+- Wired to the GitHub trackers people bookmark and forget to check, for me personally: [speedyapply/2027-SWE-College-Jobs](https://github.com/speedyapply/2027-SWE-College-Jobs) and [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships), plus a couple more
 - Layered with a live web/ATS search on top, tailored to the roles and companies I actually care about, not just whatever's on those repos
 - Fed straight into the daily brief automatically, no manual repo-checking, real verified openings are just sitting there when I open my brief
 

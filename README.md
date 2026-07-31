@@ -67,9 +67,9 @@ Straight across from the problems above:
 
 ## The three pillars
 
-Everything above is deliberately general. This is what it actually looks like once you point it at three things a tech student is juggling at once: experience, interview prep, and classes.
+Everything above is deliberately general. This is what it actually looks like once you point it at three things a tech student is juggling at once: experience, interview prep, and studies
 
-### Experience: internships, co-op, research
+### Experience: internships, co-op, research, etc
 
 `/scout` and the job-scout agent do the checking for me, instead of me checking anything myself:
 
@@ -79,11 +79,11 @@ Everything above is deliberately general. This is what it actually looks like on
 
 ### Interview prep: LeetCode
 
-`lc-coach` and `lc` keep practice from turning into a chore: a streak, gamified XP, a rank ladder, a fixed problem set I'm actually working through instead of picking randomly. Full mechanics are in [Skills, explicit only](#skills-explicit-only), not repeating the whole system here on purpose, build your own version instead of copying mine wholesale.
+`lc-coach` and `lc` keep practice from turning into a chore: a streak, gamified XP, a rank ladder, a fixed problem set I'm actually working through instead of picking randomly. Full mechanics are in [Skills, explicit only](#skills-explicit-only)
 
 ### Studies: classes
 
-`tutor` and `quiz` cover explaining and testing. The other half is capture: Granola records the lecture while I'm free to actually ask questions instead of transcribing, then the transcript goes into `/log` afterward, which already knows how to file it into the right note or daily log without me deciding where. (Manual today, paste the transcript in after class, not a live auto-pipeline yet.)
+`tutor` and `quiz` cover explaining and testing. The other half is capturing lecture notes to the vault: use Granola to record the lecture while I'm free to actually ask questions instead of transcribing, then the transcript goes into `/log` afterward, which already knows how to file it into the right note or daily log without me deciding where. (Manual today, paste the transcript in after class, not a live auto-pipeline yet.)
 
 ---
 

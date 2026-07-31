@@ -7,10 +7,10 @@ straightforward indepth guide to offloading your brain to ai if you're a chud li
 - [Quick rundown](#quick-rundown): the two tools and why pairing them works
 - [The problem](#the-problem): what things looked like before this setup
 - [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
-- [The three pillars](#the-three-pillars): experience, interview prep, and studies, tailored to a tech student
 - [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
 - [My setup](#my-setup): a reference folder structure, copy what's useful
 - [How I actually use it](#how-i-actually-use-it): the orchestrator, the skills/commands bench, and the agents behind it
+- [The three pillars](#the-three-pillars): experience, interview prep, and studies, tailored to a tech student
 - [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
 - [Notes](#notes): what mattered more than the folders themselves
 
@@ -62,28 +62,6 @@ Straight across from the problems above:
 - Priorities live in the vault, so "what should I focus on" is grounded in what I committed to, not generic
 - LeetCode has a visible streak and a reason to protect it
 - Daily work and learnings get filed somewhere the agent can read, instead of dying in a notes app
-
----
-
-## The three pillars
-
-Everything above is deliberately general. This is what it actually looks like once you point it at three things a tech student is juggling at once: experience, interview prep, and studies
-
-### Experience: internships, co-op, research, etc
-
-`/scout` and the job-scout agent do the checking for me, instead of me checking anything myself:
-
-- Wired to the GitHub trackers people bookmark and forget to check, for me personally: [speedyapply/2027-SWE-College-Jobs](https://github.com/speedyapply/2027-SWE-College-Jobs) and [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships), plus a couple more
-- Layered with a live web/ATS search on top, tailored to the roles and companies I actually care about, not just whatever's on those repos
-- Fed straight into the daily brief automatically, no manual repo-checking, real verified openings are just sitting there when I open my brief
-
-### Interview prep: LeetCode
-
-`lc-coach` and `lc` keep practice from turning into a chore: a streak, gamified XP, a rank ladder, a fixed problem set I'm actually working through instead of picking randomly. Full mechanics are in [Skills, explicit only](#skills-explicit-only)
-
-### Studies: classes
-
-`tutor` and `quiz` cover explaining and testing. The other half is capturing lecture notes to the vault: use Granola to record the lecture while I'm free to actually ask questions instead of transcribing, then the transcript goes into `/log` afterward, which already knows how to file it into the right note or daily log without me deciding where. (Manual today, paste the transcript in after class, not a live auto-pipeline yet.)
 
 ---
 
@@ -368,6 +346,28 @@ The [orchestrator](#the-orchestrator) is what wakes most of these up on a schedu
 - **research agent** — instead of me sitting in Google, opening tabs and copy-pasting, I hand it a topic and it does the whole dig: pulls from the best, highly-rated sources for that specific thing, cites them, and logs it back as a knowledge note using the conventions and folder structure it already knows from my vault. Isolated research in, a finished linked note in the right place out.
 - **vault-audit agent** — my `lint` sweep reads the whole vault for stale notes, missing pages, broken links, drift. As an agent it just fixes the stale, obvious stuff on its own without asking, leans the list down using calls I've already made before, and only surfaces the handful of things that actually need my judgment. I get a short decision list, not a full audit dump. The orchestrator calls it once a week, checking whether a sweep already ran in the last 7 days before running another, I can also run it standalone any time I want a deep sweep outside that cadence.
 - **job-scout agent** — part job finder, part `lc-coach` for my whole career. It scours the most recent changes to anything FAANG-related in my vault, tells me the highest-ROI things to work on next so I stay focused, then hands back verified open roles plus a closing affirmation in the same voice the rest of the system runs on. When the orchestrator calls it each morning, it adds one rule on top of the agent's own vetting: never trust a search snippet, fetch the real posting page and confirm date, location, and eligibility before anything lands on my list.
+
+---
+
+## The three pillars
+
+Everything above is deliberately general. This is what it actually looks like once you point it at three things a tech student is juggling at once: experience, interview prep, and studies.
+
+### Experience: internships, co-op, research, etc
+
+`/scout` and the job-scout agent do the checking for me, instead of me checking anything myself:
+
+- Wired to the GitHub trackers people bookmark and forget to check, for me personally: [speedyapply/2027-SWE-College-Jobs](https://github.com/speedyapply/2027-SWE-College-Jobs) and [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships), plus a couple more
+- Layered with a live web/ATS search on top, tailored to the roles and companies I actually care about, not just whatever's on those repos
+- Fed straight into the daily brief automatically, no manual repo-checking, real verified openings are just sitting there when I open my brief
+
+### Interview prep: LeetCode
+
+`lc-coach` and `lc` keep practice from turning into a chore: a streak, gamified XP, a rank ladder, a fixed problem set I'm actually working through instead of picking randomly, both built on the [Skills, explicit only](#skills-explicit-only) pieces above.
+
+### Studies: classes
+
+`tutor` and `quiz` cover explaining and testing. The other half is capturing lecture notes to the vault: use Granola to record the lecture while I'm free to actually ask questions instead of transcribing, then the transcript goes into `/log` afterward, which already knows how to file it into the right note or daily log without me deciding where. (Manual today, paste the transcript in after class, not a live auto-pipeline yet.)
 
 ---
 

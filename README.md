@@ -1,5 +1,20 @@
 # Obsidian + Claude Code: A Student's Second Brain
 
+## Index
+
+- [Quick rundown](#quick-rundown): the two tools and why pairing them works
+- [The problem](#the-problem): what things looked like before this setup
+- [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
+- [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
+- [My setup](#my-setup): a reference folder structure, copy what's useful
+- [How I actually use it](#how-i-actually-use-it): the orchestrator, the skills/commands bench, and the agents behind it
+- [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
+- [Notes](#notes): what mattered more than the folders themselves
+
+**In a hurry?** [Quick rundown](#quick-rundown) plus [The solution](#the-solution) is the whole pitch in about two minutes. Want the in-depth version? Read straight through, that's what the rest of this is for.
+
+---
+
 straightforward indepth guide to offloading your brain to ai if you're a chud like me
 
 ## Quick rundown
@@ -23,19 +38,6 @@ Before this, my actual situation looked like:
 - Daily work and learnings at my internship that either went nowhere or sat in a notes app no agent could read
 
 The vault fixes all of it.
-
----
-
-## Index
-
-- [The solution](#the-solution): pairing Obsidian with Claude Code fixes all of it
-- [Scaffolding from zero](#scaffolding-from-zero): let Claude Code interview you, then migrate what you already have
-- [My setup](#my-setup): a reference folder structure, copy what's useful
-- [How I actually use it](#how-i-actually-use-it): the orchestrator, the skills/commands bench, and the agents behind it
-- [Syncing across devices](#syncing-across-devices): Google Drive for desktops, what your phone actually gets
-- [Notes](#notes): what mattered more than the folders themselves
-
-**In a hurry?** [Quick definitions](#quick-definitions) plus [The solution](#the-solution) is the whole pitch in about two minutes. Want the in-depth version? Read straight through, that's what the rest of this is for.
 
 ---
 

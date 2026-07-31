@@ -2,7 +2,7 @@
 
 straightforward indepth guide to offloading your brain to ai if you're a chud like me
 
-## Quick definitions
+## Quick rundown
 
 - **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together. (free) [obsidian.md](https://obsidian.md/download)
 - **Claude Code:** an AI agent that reads and writes the files in a folder. (~$20/mo, Claude Pro) [claude.com/product/claude-code](https://claude.com/product/claude-code)

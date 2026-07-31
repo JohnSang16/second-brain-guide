@@ -17,6 +17,7 @@ straightforward indepth guide to offloading your brain to ai if you're a chud li
 **In a hurry?** [Quick rundown](#quick-rundown) plus [The solution](#the-solution) is the whole pitch in about two minutes. Want the in-depth version? Read straight through, that's what the rest of this is for.
 
 ---
+
 ## Quick rundown
 
 - **Obsidian:** a free note-taking app where your notes are plain text files in a folder you own, all linked together. (free) [obsidian.md](https://obsidian.md/download)
